@@ -1,20 +1,25 @@
 import UIKit
 
-public class HLSVideoView: UIView {
-    public let thumbnailImageView = UIImageView()
-    public let videoView = UIView()
+public protocol HLSVideoViewDelegate: AnyObject {
+    func didLoadHLSVideo()
+}
 
+public class HLSVideoView: UIView {
     public init() {
         super.init(frame: .zero)
-        addSubview(thumbnailImageView)
-        addSubview(videoView)
-        let thumbnailLeft = thumbnailImageView.leftAnchor.constraint(equalTo: leftAnchor)
-        NSLayoutConstraint.activate([
-            thumbnailLeft,
-        ])
+        translatesAutoresizingMaskIntoConstraints = false
+        backgroundColor = .orange
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func play(urlString: String) async -> Bool {
+        guard let url = URL(string: urlString) else {
+            return false
+        }
+        
+        return true
     }
 }

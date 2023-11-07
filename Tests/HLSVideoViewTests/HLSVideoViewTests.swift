@@ -6,6 +6,8 @@ final class HLSVideoViewTests: XCTestCase {
         // This is an example of a functional test case.
         // Use XCTAssert and related functions to verify your tests produce the correct
         // results.
-        XCTAssertEqual(HLSVideoView().text, "Hello, World!")
+        let view = HLSVideoView()
+        XCTAssertFalse(view.play(urlString: ""))
+        XCTAssertTrue(view.play(urlString: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_adv_example_hevc/master.m3u8"))
     }
 }
