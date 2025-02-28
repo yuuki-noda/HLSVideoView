@@ -13,6 +13,7 @@
 		B66FEBB12AFA4021002673F2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B66FEBB02AFA4021002673F2 /* Assets.xcassets */; };
 		B66FEBB42AFA4021002673F2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B66FEBB22AFA4021002673F2 /* LaunchScreen.storyboard */; };
 		B66FEBBD2AFA403E002673F2 /* HLSVideoView in Frameworks */ = {isa = PBXBuildFile; productRef = B66FEBBC2AFA403E002673F2 /* HLSVideoView */; };
+		B6CB4BD52D71AF3800DEAEB3 /* HLSVideoView in Frameworks */ = {isa = PBXBuildFile; productRef = B6CB4BD42D71AF3800DEAEB3 /* HLSVideoView */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B66FEBBD2AFA403E002673F2 /* HLSVideoView in Frameworks */,
+				B6CB4BD52D71AF3800DEAEB3 /* HLSVideoView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = HLSVideoViewExample;
 			packageProductDependencies = (
 				B66FEBBC2AFA403E002673F2 /* HLSVideoView */,
+				B6CB4BD42D71AF3800DEAEB3 /* HLSVideoView */,
 			);
 			productName = HLSVideoViewExample;
 			productReference = B66FEBA42AFA4020002673F2 /* HLSVideoViewExample.app */;
@@ -114,7 +117,7 @@
 			);
 			mainGroup = B66FEB9B2AFA4020002673F2;
 			packageReferences = (
-				B66FEBBB2AFA403E002673F2 /* XCLocalSwiftPackageReference ".." */,
+				B6CB4BD32D71AF3800DEAEB3 /* XCLocalSwiftPackageReference "../../HLSVideoView" */,
 			);
 			productRefGroup = B66FEBA52AFA4020002673F2 /* Products */;
 			projectDirPath = "";
@@ -294,6 +297,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -320,6 +324,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 13;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -357,14 +362,18 @@
 /* End XCConfigurationList section */
 
 /* Begin XCLocalSwiftPackageReference section */
-		B66FEBBB2AFA403E002673F2 /* XCLocalSwiftPackageReference ".." */ = {
+		B6CB4BD32D71AF3800DEAEB3 /* XCLocalSwiftPackageReference "../../HLSVideoView" */ = {
 			isa = XCLocalSwiftPackageReference;
-			relativePath = ..;
+			relativePath = ../../HLSVideoView;
 		};
 /* End XCLocalSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
 		B66FEBBC2AFA403E002673F2 /* HLSVideoView */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = HLSVideoView;
+		};
+		B6CB4BD42D71AF3800DEAEB3 /* HLSVideoView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = HLSVideoView;
 		};

@@ -4,6 +4,15 @@ import UIKit
 public class HLSVideoView: UIView {
     public override static var layerClass: AnyClass { AVPlayerLayer.self }
 
+    override public init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = .black
+    }
+    
+    public required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     public func load(url: URL, isLoop: Bool = true) async -> Bool {
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
@@ -17,7 +26,11 @@ public class HLSVideoView: UIView {
             observers = player.observe(\.status, options: .new, changeHandler: { player, _ in
                 switch player.status {
                 case .readyToPlay:
-                    continuation.resume(returning: true)
+                    Task { @MainActor in
+                        player.play()
+                        player.pause()
+                        continuation.resume(returning: true)
+                    }
                 default:
                     continuation.resume(returning: false)
                 }
