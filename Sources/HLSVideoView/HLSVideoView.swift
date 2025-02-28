@@ -1,25 +1,45 @@
+import AVFoundation
 import UIKit
 
-public protocol HLSVideoViewDelegate: AnyObject {
-    func didLoadHLSVideo()
-}
-
 public class HLSVideoView: UIView {
-    public init() {
-        super.init(frame: .zero)
-        translatesAutoresizingMaskIntoConstraints = false
-        backgroundColor = .orange
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func play(urlString: String) async -> Bool {
-        guard let url = URL(string: urlString) else {
-            return false
+    public override static var layerClass: AnyClass { AVPlayerLayer.self }
+
+    public func load(url: URL, isLoop: Bool = true) async -> Bool {
+        let asset = AVAsset(url: url)
+        let playerItem = AVPlayerItem(asset: asset)
+        player = AVQueuePlayer(playerItem: playerItem)
+        player.volume = 0.0
+        playerLayer.player = player
+        if (isLoop) {
+            looper = AVPlayerLooper(player: player, templateItem: playerItem)
         }
-        
-        return true
+        return await withCheckedContinuation { continuation in
+            observers = player.observe(\.status, options: .new, changeHandler: { player, _ in
+                switch player.status {
+                case .readyToPlay:
+                    continuation.resume(returning: true)
+                default:
+                    continuation.resume(returning: false)
+                }
+            })
+        }
     }
+
+    public func play() {
+        player.play()
+    }
+    
+    public func stop() {
+        player.pause()
+    }
+    
+    // MARK: Private
+
+    private var looper: AVPlayerLooper?
+
+    private var player: AVQueuePlayer!
+
+    private var observers: NSKeyValueObservation?
+
+    private var playerLayer: AVPlayerLayer { layer as! AVPlayerLayer }
 }
