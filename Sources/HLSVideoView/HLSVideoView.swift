@@ -13,11 +13,11 @@ public class HLSVideoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func load(url: URL, isLoop: Bool = true) async -> Bool {
+    public func load(url: URL, isLoop: Bool = true, volume: Float = 0.0) async -> Bool {
         let asset = AVAsset(url: url)
         let playerItem = AVPlayerItem(asset: asset)
         player = AVQueuePlayer(playerItem: playerItem)
-        player.volume = 0.0
+        player.volume = volume
         playerLayer.player = player
         if (isLoop) {
             looper = AVPlayerLooper(player: player, templateItem: playerItem)
