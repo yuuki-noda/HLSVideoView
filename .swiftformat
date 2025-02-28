@@ -1,0 +1,60 @@
+# see https://github.com/nicklockwood/SwiftFormat/blob/main/Rules.md
+
+# format options
+
+# trailingCommas
+
+--commas inline
+
+# numberFormatting
+
+--binarygrouping none
+--decimalgrouping none
+--octalgrouping none
+--hexgrouping none
+--exponentcase lowercase
+
+# elseOnSameLine
+
+--elseposition next-line
+--guardelse same-line
+
+# fileHeader
+
+--header ignore
+
+# indent
+
+--indent 4
+
+# redundantSelf
+
+--selfrequired
+
+# unusedArguments
+
+--stripunusedargs closure-only
+
+# trailingClosures
+
+--trailingclosures
+
+# wrapArguments
+
+--wraparguments before-first
+--wrapcollections before-first
+
+# organizeDeclarations
+
+--beforemarks
+
+# acronyms
+
+--acronyms
+
+--disable redundantReturn, wrapMultilineStatementBraces
+--enable isEmpty, markTypes, sortSwitchCases, wrapConditionalBodies, wrapEnumCases, organizeDeclarations
+
+# file options
+
+--exclude Pods, Carthage, R.generated.swift, Genesis

@@ -1,5 +1,5 @@
-import XCTest
 @testable import HLSVideoView
+import XCTest
 
 final class HLSVideoViewTests: XCTestCase {
     func testExample() throws {

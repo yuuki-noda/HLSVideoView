@@ -5,10 +5,45 @@
 //  Created by yuki noda on 2023/11/07.
 //
 
-import UIKit
 import HLSVideoView
+import UIKit
 
 final class ViewController: UIViewController {
+    // MARK: Internal
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .systemBackground
+        view.addSubview(hlsVideoView)
+        view.addSubview(controlButton)
+        controlButton.addTarget(self, action: #selector(didTapControlButton(_:)), for: .touchUpInside)
+        hlsVideoView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            hlsVideoView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0),
+            hlsVideoView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16.0),
+            hlsVideoView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            hlsVideoView.heightAnchor.constraint(equalTo: hlsVideoView.widthAnchor, multiplier: 9.0 / 16.0),
+            controlButton.centerXAnchor.constraint(equalTo: hlsVideoView.centerXAnchor),
+            controlButton.topAnchor.constraint(equalTo: hlsVideoView.bottomAnchor, constant: 16.0),
+            controlButton.widthAnchor.constraint(equalToConstant: 88.0),
+            controlButton.heightAnchor.constraint(equalToConstant: 44.0)
+        ])
+
+        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8") else {
+            return
+        }
+        Task {
+            if await hlsVideoView.load(url: url) {
+                controlButton.isEnabled = true
+            }
+            else {
+                controlButton.isEnabled = false
+            }
+        }
+    }
+
+    // MARK: Private
+
     private let hlsVideoView = HLSVideoView()
     private let controlButton: UIButton = {
         let button = UIButton()
@@ -23,41 +58,12 @@ final class ViewController: UIViewController {
         button.isEnabled = false
         return button
     }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .systemBackground
-        view.addSubview(hlsVideoView)
-        view.addSubview(controlButton)
-        controlButton.addTarget(self, action: #selector(didTapControlButton(_:)), for: .touchUpInside)
-        hlsVideoView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            hlsVideoView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16.0),
-            hlsVideoView.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -16.0),
-            hlsVideoView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            hlsVideoView.heightAnchor.constraint(equalTo: hlsVideoView.widthAnchor, multiplier: 9.0/16.0),
-            controlButton.centerXAnchor.constraint(equalTo: hlsVideoView.centerXAnchor),
-            controlButton.topAnchor.constraint(equalTo: hlsVideoView.bottomAnchor, constant: 16.0),
-            controlButton.widthAnchor.constraint(equalToConstant: 88.0),
-            controlButton.heightAnchor.constraint(equalToConstant: 44.0)
-        ])
-        
-        guard let url = URL(string: "https://devstreaming-cdn.apple.com/videos/streaming/examples/bipbop_4x3/bipbop_4x3_variant.m3u8") else {
-            return
-        }
-        Task {
-            if await hlsVideoView.load(url: url) {
-                controlButton.isEnabled = true
-            } else {
-                controlButton.isEnabled = false
-            }
-        }
-    }
-    
+
     @objc private func didTapControlButton(_ sender: UIButton) {
         if controlButton.isSelected {
             hlsVideoView.stop()
-        } else {
+        }
+        else {
             hlsVideoView.play()
         }
         controlButton.isSelected.toggle()
